@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<script>
+				$(document).ready(function(){
+					var socket = io.connect('http://10.10.10.64:3000');
+
+					window.addEventListener("deviceorientation", function(event) {
+				          z = Math.round(event.alpha);
+						  x = Math.round(event.beta);
+						  y = Math.round(event.gamma);
+						  
+						  $('p').text('Y'+y);
+						  $('p+p').text('X'+x);
+						  $('p+p+p').text('Z'+z);
+						  
+						  socket.emit('iphone_evt', { x: x, y: y, z: z });
+
+						  
+						  
+				    }, true);			
+				
+					
+					
+					
+					
+				});	
+		</script>
+	</head>
+	<body>
+		<p></p>
+		<p></p>
+		<p></p>
+	</body>
+</html>
